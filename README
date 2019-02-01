@@ -1,0 +1,12 @@
+Data sets are from Bucks and Hawks in 2016-2017 Season.  Includes variables:
+Game--Home game number 
+Record--Record of the team before the game (some of these look like dates because of Excel formatting)
+WinPct--Win % of the team before the game
+Plusminus--Games above or below .500 record
+Opponent--opponent in the game
+Opp.Record--Opponent's record before the game
+OppWinPct--Opponent's win % before the game
+OppPlusminus--Opponent games above or below .500
+Opp.AllStar--# of all stars on the opponents team (current or past)
+Weekday--Day of the week of the game
+LaskHomeGame--Days since previous home game
