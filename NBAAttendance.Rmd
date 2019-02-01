@@ -1,0 +1,55 @@
+---
+title: "Final Project"
+author: "Ricardo del Olmo and Zack Ray"
+date: "March 15, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,message=FALSE,warning=FALSE,fig.height=4,fig.width=6)
+```
+
+```{r,echo=FALSE,message=FALSE}
+#These commands load the required packages and datasets. 
+
+# echo=FALSE and message=FALSE prevents printing of system messages just associated with loading packages
+# Don't change the following lines in this cod chunk
+library(mosaic)
+library(gmodels)
+library(readr)
+BucksData <- read_csv("C:/Users/usuario/Desktop/MATH 360/Stats Project Data - Bucks.csv")
+HawksData <- read_csv("C:/Users/usuario/Desktop/MATH 360/Stats Project Data - Hawks.csv")
+```
+
+
+```{r}
+head(BucksData)
+glimpse(BucksData)
+summary(BucksData)
+```
+
+```{r}
+BucksData = mutate(BucksData, pct.attendance = TotalAttendance/18717)
+BucksData = mutate(BucksData, prop.attendance = log((pct.attendance+.1)/(1-(pct.attendance+.1))))
+```
+
+```{r}
+gf_boxplot(prop.attendance~EndOrDay,data = BucksData)
+gf_histogram(~prop.attendance|EndOrDay~., data = BucksData)
+favstats(prop.attendance~EndOrDay,data = BucksData)
+t.test(prop.attendance~EndOrDay,data = BucksData)
+```
+
+```{r}
+gf_point(prop.attendance~CombWinPct, data = BucksData)
+lm.mod1=lm(prop.attendance~CombWinPct, data = BucksData)
+plot(lm.mod1, which = 2)
+gf_point(prop.attendance~OppCombWinPct, data = BucksData)
+```
+
+```{r}
+lm.attendance1=lm(prop.attendance~CombWinPct+OppCombWinPct+EndOrDay+twoTimeAllStars, data = BucksData)
+summary(lm.attendance1)
+AIC(lm.attendance1)
+```
+
